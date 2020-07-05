@@ -1,13 +1,25 @@
 <template>
-  <div class="input">
+  <div class="container is-fluid">
     <ul>
-      <li v-for="choice in choices" :key="choice">
-      {{ choice }}
+      <li v-for="(choice, index) in choices" :key="index">
+          <p>{{ choice }}</p>
+          <button @click="removeChoice(index)" class="button is-danger is-small">Remove</button>
       </li>
     </ul>
-  <input v-model="inputChoice" type="text"/>
-  <button @click="addChoice()">Add choice</button>
-    <button @click="makeSelection()">Choose for me!</button>
+    <div class="field has-addons">
+      <div class="control">
+        <input v-model="inputChoice" class="input is-primary is-medium" type="text">
+      </div>
+      <div class="control">
+        <button @click="addChoice()" class="button is-primary is-medium">Add</button>
+      </div>
+    </div>
+    <div class="field control">
+      <button @click="resetChoices()" class="button is-warning is-medium is-fullwidth">Remove all choices</button>
+    </div>
+    <div class="field control">
+      <button @click="makeSelection()" class="button is-success is-medium is-fullwidth">Choose for me!</button>
+    </div>
   </div>
 </template>
 
@@ -28,6 +40,9 @@ export default {
       this.choices.push(this.inputChoice);
       this.clearInput();
     },
+    resetChoices: function() {
+      this.choices = [];
+    },
     clearInput: function() {
       this.inputChoice = '';
     },
@@ -36,6 +51,9 @@ export default {
       var selectedChoice = this.choices[Math.floor(Math.random() * amountOfChoices)];
       this.choices = [];
       this.choices.push(selectedChoice);
+    },
+    removeChoice: function(index) {
+      this.choices.splice(index, 1);
     }
   }
 };
@@ -46,14 +64,23 @@ export default {
 h3 {
   margin: 40px 0 0;
 }
-/*ul {
-  list-style-type: none;
-  padding: 0;
+ul {
+  margin-bottom: 10px;
 }
 li {
-  display: inline-block;
-  margin: 0 10px;
-}*/
+  position:relative;
+  height:100%;
+  p {
+    font-size: 2.2em;
+    margin: 0 10px;
+    display:inline-block;
+  }
+  button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
 a {
   color: #42b983;
 }
