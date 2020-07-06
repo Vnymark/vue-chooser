@@ -15,7 +15,7 @@
 }
 
 h1 {
-  font-size: 3em;
+  font-size: 2em;
   font-family: "Comic Sans MS";
   border-bottom: solid 2px;
 }

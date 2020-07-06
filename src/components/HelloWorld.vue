@@ -1,17 +1,25 @@
 <template>
-  <div class="container is-fluid">
-    <ul>
-      <li v-for="(choice, index) in choices" :key="index">
-          <p>{{ choice }}</p>
-          <button @click="removeChoice(index)" class="button is-danger is-small">Remove</button>
-      </li>
-    </ul>
+  <div class="container padding-sides">
+    <table class="table is-striped is-fullwidth">
+      <tbody>
+        <tr v-for="(choice, index) in choices" :key="index">
+          <td class="left"><p>{{ choice }}</p></td>
+          <td class="right is-narrow">
+            <button @click="removeChoice(index)" class="button is-danger is-medium">
+              <span class="icon">
+                <i class="fas fa-times"></i>
+              </span>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
     <div class="field has-addons">
-      <div class="control">
-        <input v-model="inputChoice" class="input is-primary is-medium" type="text">
+      <div class="control is-expanded">
+        <input v-model="inputChoice" class="input is-success is-medium" type="text">
       </div>
       <div class="control">
-        <button @click="addChoice()" class="button is-primary is-medium">Add</button>
+        <button @click="addChoice()" class="button is-success is-medium">Add</button>
       </div>
     </div>
     <div class="field control">
@@ -84,4 +92,15 @@ li {
 a {
   color: #42b983;
 }
+
+tbody {
+  font-size: 2em;
+}
+.right {
+  padding-right: 0;
+  vertical-align: middle;
+}
+  .padding-sides {
+    padding: 0 2em 0 2em;
+  }
 </style>
